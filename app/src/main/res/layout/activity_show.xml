@@ -7,4 +7,8 @@
     android:orientation="vertical"
     tools:context="sg.edu.rp.c347.p05_songsofsingapore.ShowActivity">
 
+    <ListView
+        android:id="@+id/lvShow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

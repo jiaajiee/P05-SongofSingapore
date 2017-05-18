@@ -1,5 +1,6 @@
 package sg.edu.rp.c347.p05_songsofsingapore;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,20 +39,31 @@ public class MainActivity extends AppCompatActivity {
                 String title = etTitle.getText().toString();
                 String singer = etSinger.getText().toString();
                 int year = Integer.parseInt(etYear.getText().toString());
-                rg = (RadioGroup)findViewById(R.id.rg);
-                int selected = rg.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) findViewById(selected);
+                RadioGroup rg = (RadioGroup) findViewById(R.id.rg);
+                int selectedButtonId = rg.getCheckedRadioButtonId();
+                RadioButton rb = (RadioButton) findViewById(selectedButtonId);
+                String strAmountStars = rb.getText() + "";
+                int amountStars = Integer.parseInt(strAmountStars);
 
-                String data = title + singer + year + rb;
 
                 DBHelper dbh = new DBHelper(MainActivity.this);
-                long row_affected = dbh.insertSong(data);
+                long row_affected = dbh.insertSong(year, title, singer, amountStars);
                 dbh.close();
 
                 if (row_affected != -1){
                     Toast.makeText(MainActivity.this, "Insert successful",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnShow.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(MainActivity.this,
+                        ShowActivity.class);
+                // Start the new activity
+                startActivity(i);
             }
         });
 

@@ -1,10 +1,12 @@
 package sg.edu.rp.c347.p05_songsofsingapore;
 
+import java.io.Serializable;
+
 /**
  * Created by 15017274 on 18/5/2017.
  */
 
-public class Song {
+public class Song implements Serializable{
     private int id;
     private String title;
     private  String singers;
