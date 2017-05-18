@@ -7,8 +7,16 @@
     android:orientation="vertical"
     tools:context="sg.edu.rp.c347.p05_songsofsingapore.ShowActivity">
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show All Song with 5 Stars" />
+
     <ListView
         android:id="@+id/lvShow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@color/colorPrimaryDark"
+        android:dividerHeight="4px"/>
 </LinearLayout>
