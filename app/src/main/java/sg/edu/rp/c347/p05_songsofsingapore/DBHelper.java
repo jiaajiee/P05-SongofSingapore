@@ -87,10 +87,15 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return notes;
     }
+
     public int updateSong(Song data){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, data.getId());
+        values.put(COLUMN_SONG_TITLE, data.getTitle());
+        values.put(COLUMN_SONG_SINGER, data.getSingers());
+        values.put(COLUMN_SONG_YEAR, data.getYear());
+        values.put(COLUMN_SONG_STARS, data.getStars());
         String condition = COLUMN_ID + "= ?";
         String[] args = {String.valueOf(data.getId())};
         int result = db.update(TABLE_SONG, values, condition, args);
@@ -106,5 +111,32 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    public ArrayList<Song> getSongWithRating5() {
+        ArrayList<Song> songs = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns= {COLUMN_ID, COLUMN_SONG_TITLE, COLUMN_SONG_SINGER, COLUMN_SONG_YEAR, COLUMN_SONG_STARS};
+        String condition = COLUMN_SONG_STARS + " Like ?";
+        String[] args = { "5" };
+        Cursor cursor = db.query(TABLE_SONG, columns, condition, args,
+                null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                int year = cursor.getInt(1);
+                String title = cursor.getString(2);
+                String singer = cursor.getString(3);
+                int stars = cursor.getInt(4);
+                Song obj = new Song(id, title, singer, year, stars);
+                songs.add(obj);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return songs;
+    }
+
 
 }
