@@ -35,13 +35,13 @@ public class ModifyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify);
 
-        tvID = (TextView)findViewById(R.id.textViewID);
-        etTitle = (EditText)findViewById(R.id.editTextTitle);
-        etSinger = (EditText)findViewById(R.id.editTextSingers);
-        etYear = (EditText)findViewById(R.id.editTextYear);
-        btnCancel = (Button)findViewById(R.id.buttonCancel);
-        btnDelete = (Button)findViewById(R.id.buttonDelete);
-        btnUpdate = (Button)findViewById(R.id.buttonUpdate);
+        tvID = (TextView) findViewById(R.id.textViewID);
+        etTitle = (EditText) findViewById(R.id.editTextTitle);
+        etSinger = (EditText) findViewById(R.id.editTextSingers);
+        etYear = (EditText) findViewById(R.id.editTextYear);
+        btnCancel = (Button) findViewById(R.id.buttonCancel);
+        btnDelete = (Button) findViewById(R.id.buttonDelete);
+        btnUpdate = (Button) findViewById(R.id.buttonUpdate);
         rg = (RadioGroup) findViewById(R.id.radiogroup);
 
         Intent i = getIntent();
@@ -55,19 +55,15 @@ public class ModifyActivity extends AppCompatActivity {
         etTitle.setText(title);
         etSinger.setText(singer);
         etYear.setText("" + year);
-        if(stars >= 5){
+        if (stars >= 5) {
             rg.check(R.id.radioButton5);
-        }
-        else if(stars == 4){
+        } else if (stars == 4) {
             rg.check(R.id.radioButton4);
-        }
-        else if(stars == 3){
+        } else if (stars == 3) {
             rg.check(R.id.radioButton3);
-        }
-        else if(stars == 2){
+        } else if (stars == 2) {
             rg.check(R.id.radioButton2);
-        }
-        else if(stars == 1){
+        } else if (stars == 1) {
             rg.check(R.id.radioButton);
         }
 
@@ -86,11 +82,10 @@ public class ModifyActivity extends AppCompatActivity {
                 int newStars = Integer.parseInt(newStarsStr);
                 Song data = new Song(id, newTitle, newSinger, newYear, newStars);
                 int update = dbh.updateSong(data);
-                if (update < 1){
+                if (update < 1) {
                     Toast.makeText(ModifyActivity.this, "Update Fail",
                             Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     Toast.makeText(ModifyActivity.this, "Update Successful",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -106,11 +101,10 @@ public class ModifyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 DBHelper dbh = new DBHelper(ModifyActivity.this);
                 int delete = dbh.deleteSong(id);
-                if (delete < 1){
+                if (delete < 1) {
                     Toast.makeText(ModifyActivity.this, "Delete Fail",
                             Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     Toast.makeText(ModifyActivity.this, "Delete Successful",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -120,6 +114,7 @@ public class ModifyActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +122,4 @@ public class ModifyActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }
