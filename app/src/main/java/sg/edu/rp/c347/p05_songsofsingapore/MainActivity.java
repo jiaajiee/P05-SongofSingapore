@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         etSinger = (EditText) findViewById(R.id.etSinger);
         etYear = (EditText) findViewById(R.id.etYear);
 
-        al = new ArrayList<String>();
+        al = new ArrayList<>();
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
